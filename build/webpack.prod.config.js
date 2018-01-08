@@ -15,7 +15,6 @@ module.exports = {
             output: {
                 comments: false // remove all comments
             }
-        }),
-        new ExtractTextPlugin('[name].bundle.css')
+        })
     ]
 };

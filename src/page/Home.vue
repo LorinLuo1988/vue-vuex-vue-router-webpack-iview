@@ -1,12 +1,15 @@
 <template>
-	<div id="home">
-		{{name}}
-		<input type="text" :value="name" @input="updateName">
-	</div>
+	<MainLayout id="home">
+		<div>
+			{{name}}
+			<input type="text" :value="name" @input="updateName">
+		</div>
+	</MainLayout>
 </template>
 
 <script>
 	import { createNamespacedHelpers } from 'vuex'
+	import MainLayout from '@/layout/Main'
 
 	const { mapState, mapMutations } = createNamespacedHelpers('home')
 
@@ -22,6 +25,9 @@
 					commit('updateHomeName', event.target.value)
 				}
 			})
+		},
+		components: {
+			MainLayout
 		}
 	}
 </script>

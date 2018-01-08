@@ -21,4 +21,21 @@ const store = new Vuex.Store({
 	strict: process.env.NODE_ENV !== 'production'
 })
 
+if (module.hot) {
+	module.hot.accept([
+		'./modules/home',
+		'./modules/detail'
+	], () => {
+		const home = require('./modules/home').default
+		const detail = require('./modules/detail').default
+
+		store.hotUpdate({
+			modules: {
+				home,
+				detail
+			}
+		})
+	})
+}
+
 export default store

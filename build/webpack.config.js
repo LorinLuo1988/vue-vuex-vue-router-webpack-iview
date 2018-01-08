@@ -25,8 +25,8 @@ let commonConfig = {
 	},
 	output: {
 		path: path.resolve(ROOT_PATH, 'dist'),
-        filename: '[name].bundle.js',
-        chunkFilename: '[name].[chunkHash].bundle.js',
+		filename: '[name].bundle.js',
+    chunkFilename: '[name].[chunkHash].bundle.js',
 		publicPath: '/'
 	},
 	module: {
@@ -43,7 +43,12 @@ let commonConfig = {
 					{
 						loader: 'vue-loader',
 						options: {
-							extractCSS: true
+		          loaders: {
+		            css: ExtractTextPlugin.extract({
+		              use: 'css-loader',
+                  fallback: 'vue-style-loader'
+		            })
+		          }							
 						}
 					},
 					{
@@ -65,11 +70,11 @@ let commonConfig = {
       },
 			{
 				test: /\.css$/,
-				use: ExtractTextPlugin.extract({
-					fallback: "style-loader",
-					use: "css-loader"
-				})
-			},
+        use: ExtractTextPlugin.extract({
+            use: ['css-loader'],
+            fallback: 'style-loader'
+        })	
+      },
 			{
 				test: /\.(png|jpe?g|gif|woff|svg|eot|ttf)(\?.*)?$/,
 				loader: 'url-loader',
@@ -81,19 +86,19 @@ let commonConfig = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			favicon: path.resolve(SRC_PATH, 'favicon.ico'),
-            template: path.resolve(ROOT_PATH, 'index.html'), //source
-            chunks: ['app', 'vendor'],
-            hash: true
+			favicon: path.resolve(ROOT_PATH, 'favicon.ico'),
+      template: path.resolve(ROOT_PATH, 'index.html'), //source
+      chunks: ['app', 'vendor'],
+      hash: true
 		}),
-    	new ExtractTextPlugin("style.css"),
-        new webpack.DefinePlugin(GLOBAL_CONFIG[NODE_ENV])
+		new ExtractTextPlugin('style.css'),
+    new webpack.DefinePlugin(GLOBAL_CONFIG[NODE_ENV])
 	],
 	resolve: {
-    	extensions: ['.js', '.vue', '.less', '.json'],
+    extensions: ['.js', '.vue', '.less', '.json'],
 		alias: {
-            'vue': 'vue/dist/vue.esm.js',
-            '@': SRC_PATH
+      'vue': 'vue/dist/vue.esm.js',
+      '@': SRC_PATH
 		}
 	}
 };

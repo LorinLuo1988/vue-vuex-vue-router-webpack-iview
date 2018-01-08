@@ -1,14 +1,15 @@
 <template>
-	<div id="home">
+	<MainLayout id="detail">
 		<div>path: {{path}}</div>
 		{{name}}
 		<button @click="updateName">change name</button>
-	</div>
+	</MainLayout>
 </template>
 
 <script>
 	import { createNamespacedHelpers } from 'vuex'
 	import { UPDATE_DETAIL_NAME } from '@/constant/mutaion-types'
+	import MainLayout from '@/layout/Main'
 
 	const { mapState, mapMutations } = createNamespacedHelpers('detail')
 
@@ -25,6 +26,9 @@
 			...mapMutations({
 				updateName: UPDATE_DETAIL_NAME
 			})
+		},
+		components: {
+			MainLayout
 		}
 	}
 </script>
