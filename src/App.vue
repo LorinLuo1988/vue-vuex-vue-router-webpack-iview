@@ -1,16 +1,21 @@
 <template>
-	<div id="app">
- 		<Slider class="margin-top-50" v-model="sliderValue" range></Slider>
-        <h1>{{text}}</h1>
-		<h2>{{name}}</h2>
-		<router-link to="/">Home</router-link>
-		<router-link to="/detail">Detail</router-link>
-		<router-view />
-	</div>
+	<Layout id="app">
+		<Sider collapsible hide-trigger>
+			<router-link to="/">Home</router-link>
+			<router-link to="/detail">Detail</router-link>
+		</Sider>
+    <Layout>
+    	<Header></Header>
+			<Content>
+				<router-view />
+			</Content>
+    </Layout>
+	</Layout>
 </template>
 
 <script>
 	import { mapState, mapGetters } from 'vuex'
+	import { Layout, Header, Content, Sider } from 'iview'
 
 	export default {
 		data () {
@@ -26,6 +31,12 @@
 			...mapGetters({
 				name: 'name'
 			})
+		},
+		components: {
+			Layout,
+			Header,
+			Content,
+			Sider
 		}
 	}
 </script>

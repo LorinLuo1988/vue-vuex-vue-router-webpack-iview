@@ -39,20 +39,30 @@ let commonConfig = {
 			},
 			{
 				test: /\.vue$/,
-				loader: 'vue-loader',
-				options: {
-					extractCSS: true
-				}
+				use: [
+					{
+						loader: 'vue-loader',
+						options: {
+							extractCSS: true
+						}
+					},
+					{
+						loader: 'iview-loader',
+						options: {
+							prefix: false
+						}
+					}
+				]
 			},
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader'
-            },
-            {
-            	test: /\.less$/,
-            	loader: 'style-loader!css-loader!less-loader'
-            },
+      {
+				test: /\.jsx?$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader'
+      },
+      {
+      	test: /\.less$/,
+      	loader: 'style-loader!css-loader!less-loader'
+      },
 			{
 				test: /\.css$/,
 				use: ExtractTextPlugin.extract({
