@@ -1,0 +1,8 @@
+.generate-margin-top(50);
+
+.generate-margin-top(@end, @index: 1) when (@index =< @end) {
+  .margin-top-@{index} {
+    margin-top: (@index * 1px);
+  }
+  .generate-margin-top(@end, (@index + 1));
+}
