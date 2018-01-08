@@ -71,6 +71,7 @@ let commonConfig = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
+			favicon: path.resolve(SRC_PATH, 'favicon.ico'),
             template: path.resolve(ROOT_PATH, 'index.html'), //source
             chunks: ['app', 'vendor'],
             hash: true
