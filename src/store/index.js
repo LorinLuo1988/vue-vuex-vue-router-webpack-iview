@@ -10,7 +10,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		isCollapsed: false, // 左侧sider是否折叠
-		openMenuNames: [] // 左侧sider menu展开项
+		openMenuNames: [], // 左侧sider menu展开项
+		activeRouteName: '' // 当前路由的name，对应的选中左侧sider的item
 	},
 	getters: {
 		name: state => {

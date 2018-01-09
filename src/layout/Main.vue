@@ -1,4 +1,4 @@
- <template>
+<template>
 	<Layout>
 		<Sider
 			ref="app-sider"
@@ -9,7 +9,7 @@
 			:width="isCollapsed ? 64 : 200">
       <Menu
       	:class="{'menu-collapsed': isCollapsed}"
-      	active-name="detail"
+      	:active-name="activeRouteName"
       	theme="dark"
       	width="auto"
       	:open-names="openMenuNames"
@@ -95,13 +95,16 @@
 		export default {
 			data () {
 				return {
-					mainRoutes,
-					openMenuNames: [...this.$store.state.openMenuNames]
+					mainRoutes
 				}
 			},
 			computed: {
 				...mapState([
-					'isCollapsed'
+					'isCollapsed',
+					'activeRouteName',
+					{
+						openMenuNames: state => [...state.openMenuNames]
+					}
 				]),
 				rotateIcon () {
 					return [
@@ -113,6 +116,7 @@
 			methods: {
 				routerTo (routeName) {
 					this.$router.push({ name: routeName })
+					this.updateaActiveRouteName(routeName)
 				},
 				...mapMutations({
 					collapsedSider (commit) {
@@ -120,8 +124,37 @@
 					},
 					updateOpenMenuNames (commit, openMenuNames) {
 						commit('updateOpenMenuNames', [...openMenuNames])
+					},
+					updateaActiveRouteName (commit, routeName) {
+						commit('updateaActiveRouteName', routeName)
 					}
 				})
+			},
+			watch: {
+				'$route' ({ name }) {
+					const openMenuNames = this.$store.state.openMenuNames
+
+					this.updateaActiveRouteName(name)
+
+					const parentRoute = mainRoutes.find(route => {
+						return route.children.find(route => {
+							return route.name === name
+						})
+					})
+
+					if (!parentRoute) {
+						return false
+					}
+
+					if (openMenuNames.includes(parentRoute.name)) {
+						return false
+					}
+
+					this.updateOpenMenuNames([
+						...openMenuNames,
+						parentRoute.name
+					])
+				}
 			},
 			components: {
 				Layout,

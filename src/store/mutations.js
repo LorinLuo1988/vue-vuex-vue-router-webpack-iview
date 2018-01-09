@@ -9,10 +9,16 @@ const collapsedSider = (state, isCollapsed) => {
 }
 
 const updateOpenMenuNames = (state, openMenuNames) => {
+	console.log(openMenuNames)
 	state.openMenuNames = openMenuNames
+}
+
+const updateaActiveRouteName = (state, activeRouteName) => {
+	state.activeRouteName = activeRouteName
 }
 
 export default {
 	collapsedSider,
-	updateOpenMenuNames
+	updateOpenMenuNames,
+	updateaActiveRouteName
 }

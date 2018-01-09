@@ -19,8 +19,18 @@ const mainRoutes = [
 		name: 'main',
 		component: Main,
 		children: [
-			{ path: '', name: 'home', title: 'Home', component: Home },
-			{ path: 'detail', name: 'detail', title: 'Detail', component: Detail }
+			{
+				path: '',
+				name: 'home',
+				title: 'Home',
+				component: Home
+			},
+			{
+				path: 'detail',
+				name: 'detail',
+				title: 'Detail',
+				component: Detail
+			}
 		]
 	},
 	{
@@ -28,8 +38,18 @@ const mainRoutes = [
 		name: 'age',
 		component: Main,
 		children: [
-			{ path: '', name: 'agehome', title: 'Aage Home', component: Home },
-			{ path: 'detail', name: 'agedetail', title: 'Aage Detail', component: Detail }
+			{
+				path: '',
+				name: 'agehome',
+				title: 'Aage Home',
+				component: Home
+			},
+			{
+				path: 'detail',
+				name: 'agedetail',
+				title: 'Aage Detail',
+				component: Detail
+			}
 		]
 	},
 	{
@@ -38,7 +58,12 @@ const mainRoutes = [
 		title: 'List',
 		component: Main,
 		children: [
-			{ path: 'list', name: 'list', title: 'List', component: {template: '<div>List</div>'} }
+			{
+				path: 'list',
+				name: 'list',
+				title: 'List',
+				component: {template: '<div>List</div>'}
+			}
 		]
 	}
 ]
