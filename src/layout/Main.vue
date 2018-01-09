@@ -95,16 +95,14 @@
 		export default {
 			data () {
 				return {
-					mainRoutes
+					mainRoutes,
+					openMenuNames: [...this.$store.state.openMenuNames]
 				}
 			},
 			computed: {
 				...mapState([
 					'isCollapsed',
-					'activeRouteName',
-					{
-						openMenuNames: state => [...state.openMenuNames]
-					}
+					'activeRouteName'
 				]),
 				rotateIcon () {
 					return [
@@ -131,7 +129,7 @@
 				})
 			},
 			watch: {
-				'$route' ({ name }) {
+				$route ({ name }) {
 					const openMenuNames = this.$store.state.openMenuNames
 
 					this.updateaActiveRouteName(name)
@@ -167,6 +165,9 @@
 				Dropdown,
 				DropdownMenu,
 				DropdownItem
+			},
+			mounted: function () {
+				this.updateaActiveRouteName(this.$route.name)
 			}
 		}
 </script>

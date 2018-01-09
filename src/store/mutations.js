@@ -9,7 +9,6 @@ const collapsedSider = (state, isCollapsed) => {
 }
 
 const updateOpenMenuNames = (state, openMenuNames) => {
-	console.log(openMenuNames)
 	state.openMenuNames = openMenuNames
 }
 
