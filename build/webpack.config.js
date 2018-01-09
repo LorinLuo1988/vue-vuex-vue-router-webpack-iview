@@ -33,7 +33,7 @@ let commonConfig = {
 		rules: [
 			{
 				enforce: 'pre',
-				test: /\.(vue|jsx?)$/,
+				test: /\.vue$/,
 				loader: 'eslint-loader',
 				exclude: /node_modules/
 			},
