@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { LoadingBar } from 'iview'
-import { Main, Home, Detail } from '@/page'
+import { Main } from '@/page'
 
 const errorRoutes = [
 	{
@@ -15,54 +15,23 @@ const errorRoutes = [
 
 const mainRoutes = [
 	{
-		path: '/',
-		name: 'main',
+		path: '/data-manage',
+		name: 'data-manage',
+		title: '数据管理',
+		icon: 'android-menu',
 		component: Main,
 		children: [
 			{
-				path: '',
-				name: 'home',
-				title: 'Home',
-				component: Home
+				path: 'case-import',
+				name: 'case-import',
+				title: '案件导入',
+				component: {template: '<div>案件导入</div>'}
 			},
 			{
-				path: 'detail',
-				name: 'detail',
-				title: 'Detail',
-				component: Detail
-			}
-		]
-	},
-	{
-		path: '/age',
-		name: 'age',
-		component: Main,
-		children: [
-			{
-				path: '',
-				name: 'agehome',
-				title: 'Aage Home',
-				component: Home
-			},
-			{
-				path: 'detail',
-				name: 'agedetail',
-				title: 'Aage Detail',
-				component: Detail
-			}
-		]
-	},
-	{
-		path: '/',
-		name: 'list',
-		title: 'List',
-		component: Main,
-		children: [
-			{
-				path: 'list',
-				name: 'list',
-				title: 'List',
-				component: {template: '<div>List</div>'}
+				path: 'case-manage',
+				name: 'case-manage',
+				title: '案件管理',
+				component: {template: '<div>案件管理</div>'}
 			}
 		]
 	}
