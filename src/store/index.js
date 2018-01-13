@@ -11,15 +11,17 @@ const store = new Vuex.Store({
 	state: {
 		isCollapsed: false, // 左侧sider是否折叠
 		openMenuNames: [], // 左侧sider menu展开项
-		activeRouteName: '' // 当前路由的name，对应的选中左侧sider的item
+		activeRouteName: '', // 当前路由的name，对应的选中左侧sider的item
+		breadcrumbs: [], // 导航面包屑
+		routeHistorys: [] // 路由历史记录
 	},
 	getters: {
 		name: state => {
 			return `${state.home.name} ${state.detail.name}`
 		}
 	},
-	mutations: mutations,
-	actions: actions,
+	mutations,
+	actions,
 	modules: {
 		home,
 		detail

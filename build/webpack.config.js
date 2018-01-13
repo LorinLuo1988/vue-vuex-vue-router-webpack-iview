@@ -1,22 +1,16 @@
-const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
-const path = require('path');
-
-const ROOT_PATH = path.resolve(__dirname, '../');
-const SRC_PATH = path.resolve(ROOT_PATH, 'src');
-const NODE_ENV = process.env.NODE_ENV;
+const webpack = require('webpack')
+const webpackMerge = require('webpack-merge')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
 
 const webpackEnvConfig = {
     development: require('./webpack.dev.config.js'),
     production: require('./webpack.prod.config.js')
-};
-
-const GLOBAL_CONFIG = {
-	development: require('../config/dev.env.js'),
-	production: require('../config/prod.env.js')
 }
+
+const ROOT_PATH = path.resolve(__dirname, '../')
+const SRC_PATH = path.resolve(ROOT_PATH, 'src')
+const NODE_ENV = process.env.NODE_ENV;
 
 let commonConfig = {
 	entry: {
@@ -32,32 +26,10 @@ let commonConfig = {
 	module: {
 		rules: [
 			{
-				enforce: 'pre',
-				test: /\.vue$/,
+				enforce: 'pre', //防止eslint在代码检查前，代码被其他loader修改
+				test: /\.(vue|jsx?)$/,
 				loader: 'eslint-loader',
 				exclude: /node_modules/
-			},
-			{
-				test: /\.vue$/,
-				use: [
-					{
-						loader: 'vue-loader',
-						options: {
-		          loaders: {
-		            css: ExtractTextPlugin.extract({
-		              use: 'css-loader',
-                  fallback: 'vue-style-loader'
-		            })
-		          }							
-						}
-					},
-					{
-						loader: 'iview-loader',
-						options: {
-							prefix: false
-						}
-					}
-				]
 			},
       {
 				test: /\.jsx?$/,
@@ -65,15 +37,8 @@ let commonConfig = {
 				loader: 'babel-loader'
       },
       {
-      	test: /\.less$/,
-      	loader: 'style-loader!css-loader!less-loader'
-      },
-			{
-				test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-            use: ['css-loader'],
-            fallback: 'style-loader'
-        })	
+      	test: /iview\/*.*js$/,
+      	loader: 'babel-loader'
       },
 			{
 				test: /\.(png|jpe?g|gif|woff|svg|eot|ttf)(\?.*)?$/,
@@ -87,23 +52,21 @@ let commonConfig = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			favicon: path.resolve(ROOT_PATH, 'favicon.ico'),
-      template: path.resolve(ROOT_PATH, 'index.html'), //source
+      template: path.resolve(ROOT_PATH, 'index.html'),
       chunks: ['app', 'vendor'],
       hash: true
-		}),
-		new ExtractTextPlugin('style.css'),
-    new webpack.DefinePlugin(GLOBAL_CONFIG[NODE_ENV])
+		})
 	],
 	resolve: {
-    extensions: ['.js', '.vue', '.less', '.json'],
+    extensions: ['.js', '.vue', '.less', '.css', '.json'],
 		alias: {
       'vue': 'vue/dist/vue.esm.js',
       '@': SRC_PATH
 		}
 	}
-};
+}
 
 module.exports = webpackMerge(
 	commonConfig,
 	webpackEnvConfig[NODE_ENV]
-);
+)
