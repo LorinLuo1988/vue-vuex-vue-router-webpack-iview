@@ -6,7 +6,7 @@ const ROOT_PATH = path.resolve(__dirname, '../')
 
 module.exports = {
   devServer: {
-    port: process.env.PORT || 8081,
+    port: process.env.PORT || 8082,
     hot: true,
     inline: true,
     progress: true,
